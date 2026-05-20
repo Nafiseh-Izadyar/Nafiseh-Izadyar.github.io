@@ -1,311 +1,1006 @@
-<!DOCTYPE HTML>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Nafiseh Izadyar</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nafiseh Izadyar — Researcher in ML & Computer Graphics</title>
+<meta name="description" content="Nafiseh Izadyar — PhD researcher in Machine Learning and Computer Graphics at the University of Victoria. Research in LLMs, multimodal learning, and 3D CAD data.">
+<meta name="keywords" content="Nafiseh Izadyar, machine learning, computer graphics, LLM, 3D CAD, B-Rep, University of Victoria, researcher">
+<meta name="author" content="Nafiseh Izadyar">
 
-    <link rel="stylesheet" href="assets/css/timeline.css">
+<!-- Open Graph -->
+<meta property="og:title" content="Nafiseh Izadyar — ML & Computer Graphics Researcher">
+<meta property="og:description" content="PhD researcher at UVic working on LLMs, multimodal learning, and 3D geometric modeling.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #1a1a2e;
+  --paper: #faf8f4;
+  --cream: #f0ece2;
+  --accent: #8b4513;
+  --accent-light: #c4956a;
+  --accent-faint: rgba(139, 69, 19, 0.07);
+  --muted: #6b6b7b;
+  --border: #d4d0c8;
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* --- Texture overlay --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Navigation --- */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(250, 248, 244, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; transition: 0.3s; }
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-text { animation: fadeUp 0.8s ease-out both; }
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-label::before {
+  content: '';
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: 3.6rem;
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+h1 strong {
+  font-weight: 700;
+  display: block;
+}
+
+.hero-bio {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.6rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1.5px solid var(--ink);
+}
+
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Hero graphic */
+.hero-graphic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeUp 0.8s ease-out 0.2s both;
+}
+
+.geo-container {
+  width: 380px;
+  height: 380px;
+  position: relative;
+}
+
+.geo-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Sections --- */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2rem;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+.divider {
+  width: 48px;
+  height: 1.5px;
+  background: var(--accent);
+  margin-bottom: 3rem;
+}
+
+/* --- Research --- */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.research-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.research-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.4s ease;
+}
+
+.research-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+.research-card:hover::before { height: 100%; }
+
+.research-card h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.research-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+
+.research-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: var(--accent-faint);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  margin-top: 1rem;
+  margin-right: 0.4rem;
+}
+
+/* --- Publications --- */
+.pub-list { list-style: none; }
+
+.pub-item {
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  transition: background 0.2s;
+}
+
+.pub-item:hover { background: var(--accent-faint); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; border-radius: 4px; }
+
+.pub-year {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  padding-top: 0.2rem;
+  font-weight: 500;
+}
+
+.pub-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.pub-title a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pub-title a:hover { color: var(--accent); }
+
+.pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.3rem; }
+.pub-authors strong { color: var(--ink); font-weight: 600; }
+
+.pub-venue {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.pub-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.badge-preprint { background: #fef3cd; color: #856404; }
+.badge-published { background: #d4edda; color: #155724; }
+
+/* --- Education --- */
+.edu-timeline { position: relative; padding-left: 2rem; }
+
+.edu-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--border);
+}
+
+.edu-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.edu-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.edu-item:first-child::before {
+  background: var(--accent);
+}
+
+.edu-degree {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.edu-school {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.edu-date {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.edu-details {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* --- Teaching --- */
+.teaching-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.teaching-card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.teaching-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.teaching-meta span {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* --- Skills --- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-group {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.8rem;
+}
+
+.skill-group h3 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.skill-group h3 .icon { color: var(--accent); font-size: 1.2rem; }
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.skill-tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink);
+  background: var(--cream);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+
+/* --- Contact --- */
+#contact { background: var(--ink); color: var(--paper); }
+#contact .section-label { color: var(--accent-light); }
+#contact .section-title { color: var(--paper); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.contact-text {
+  font-size: 1rem;
+  color: rgba(250, 248, 244, 0.7);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.contact-links { list-style: none; }
+
+.contact-links li {
+  margin-bottom: 1rem;
+}
+
+.contact-links a {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: color 0.25s;
+}
+
+.contact-links a:hover { color: var(--accent-light); }
+
+.contact-links .link-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 244, 0.4);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+/* --- Footer --- */
+footer {
+  background: var(--ink);
+  color: rgba(250, 248, 244, 0.4);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(250, 248, 244, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Geometric animation --- */
+@keyframes rotateGeo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+.geo-ring { animation: rotateGeo 30s linear infinite; transform-origin: center; }
+.geo-ring-reverse { animation: rotateGeo 45s linear infinite reverse; transform-origin: center; }
+.geo-pulse { animation: pulse 4s ease-in-out infinite; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: left; }
+  h1 { font-size: 2.6rem; }
+  .hero-graphic { display: none; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  .pub-year { padding-top: 0; }
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 2.1rem; }
+  section { padding: 4rem 1.2rem; }
+  .nav-links { 
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(250, 248, 244, 0.97);
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open { display: flex; }
+  .menu-toggle { display: block; }
+  .section-title { font-size: 1.8rem; }
+}
+</style>
 </head>
-<body class="is-preload">
+<body>
 
-<!-- Header -->
-<div id="header">
-
-    <div class="top">
-
-        <!-- Logo -->
-        <div id="logo">
-            <!-- <span class="image avatar48"><img src="images/avatar.jpg" alt=""/></span> -->
-            <h1 id="title">Nafiseh Izadyar</h1>
-            <p>Ph.D. Student at Univeristy of Victoria</p>
-        </div>
-
-        <!-- Nav -->
-        <nav id="nav">
-            <ul>
-                <li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
-                <li><a href="#education" id="education-link"><span class="icon solid fa-university">Education</span></a>
-                </li>
-                <!-- <li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li> -->
-                <li><a href="#workexperience" id="work-link"><span class="icon solid fa-building">Work Experience</span></a>
-                </li>
-                <li><a href="#honors" id="honors-link"><span class="icon solid fa-award">Honors and Rewards</span></a>
-                </li>
-                <!-- <li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li> -->
-            </ul>
-        </nav>
-
-    </div>
-
-    <div class="bottom">
-
-        <!-- Social Icons -->
-        <ul class="icons">
-            <li><a href="https://www.linkedin.com/in/nafiseh-izadyar-53b391147" class="icon brands fa-linkedin"><span
-                    class="label">Linkedin</span></a></li>
-            <li><a href="https://github.com/Nafiseh-Izadyar" class="icon brands fa-github"><span
-                    class="label">Github</span></a></li>
-            <li><a href="mailto:nizadyar@uvic.ca" class="icon solid fa-envelope"><span class="label">Email</span></a>
-            </li>
-            <li><a href="./NafisehIzadyar.pdf" class="icon solid fa-download"><span class="label">Resume</span></a></li>
-        </ul>
-
-    </div>
-
-</div>
-
-<!-- Main -->
-<div id="main">
-
-    <!-- Intro -->
-    <section id="top" class="one dark cover">
-        <!-- <div class="container">
-
-            <header>
-                <h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-                site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-                <p>Ligula scelerisque justo sem accumsan diam quis<br />
-                vitae natoque dictum sollicitudin elementum.</p>
-            </header>
-
-            <footer>
-                <a href="#portfolio" class="button scrolly">Magna Aliquam</a>
-            </footer>
-
-        </div> -->
-    </section>
-    <!-- About Me -->
-    <section id="about" class="three">
-        <div class="container">
-
-            <header>
-                <h2>About Me</h2>
-            </header>
-            <p> I'm a Ph.D. Student majoring in Computer Science at the <a
-                    href="https://www.uvic.ca/ecs/computerscience/index.php" target="_blank">University of Victoria</a>,
-                working under the
-                supervison of <a href="http://web.uvic.ca/~teseo/" target="_blank">Dr. Teseo Schneider</a>.
-                I recieved my Master's degree in Artificial Intelligence at the <a
-                        href="https://ce.aut.ac.ir/index.php?sid=4&slc_lang=en" target="_blank">Amirkabir University of
-                    Technology</a>. My main research interest is the application of Machine Learning in various tasks in Computer Graphics and Computer Vision.
-            </p>
-        </div>
-    </section>
-
-
-    <!-- Education -->
-    <section id="education" class="four">
-        <div class="container">
-            <div class="timeline">
-                <header>
-                    <h2>Education</h2>
-                </header>
-                <div class="entry">
-                    <div class="title">
-                        <h3>2021 - Present</h3>
-                        <p>Univeristy of Victoria</p>
-                    </div>
-                    <div class="body">
-                        <p>Ph.D. of Computer Science</p>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>2016 - 2019</h3>
-                        <p>Amirkabir University of Technology</p>
-                    </div>
-                    <div class="body">
-                        <p>M.Sc. of Artificial Intelligence</p>
-                        <!-- <ul>
-                            <li>Thesis: An improved method for visual question answering with local search</li>
-                        </ul> -->
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>2011 - 2015</h3>
-                        <p>Shariaty Technical University</p>
-                    </div>
-                    <div class="body">
-                        <p>B.Sc. of Computer Software Engineering</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Work Experience -->
-    <section id="workexperience" class="four">
-        <div class="container">
-
-            <div class="timeline">
-                <header>
-                    <h2>Work Experience</h2>
-                </header>
-                <div class="entry">
-                    <div class="title">
-                        <h3>Fall 2021- Present</h3>
-                        <p>Univeristy of Victoria</p>
-                    </div>
-                    <div class="body">
-                        <p>Research Assistant at the Departement of <a
-                                href="https://www.uvic.ca/ecs/computerscience/index.php" target="_blank">Computer
-                            Sciecne, Univeristy of Victoria </a></p>
-                    </div>
-
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>Fall 2021- Present</h3>
-                        <p>Univeristy of Victoria</p>
-                    </div>
-                    <div class="body">
-                        <p>Research Assistant at the <a href="https://www.uvic.ca/gustavson/" target="_blank">Peter B.
-                            Gustavson School of Business </a></p>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>Spring 2022</h3>
-                        <p>Univeristy of Victoria</p>
-                    </div>
-                    <div class="body">
-                        <p>Teaching Assistnat for "Systems for Massive Datasets" Course</p>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>Fall 2021</h3>
-                        <p>Univeristy of Victoria</p>
-                    </div>
-                    <div class="body">
-                        <p>Teaching Assistnat for "Introduction to Artificial Intelligence" Course</p>
-
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="title">
-                        <h3>Fall 2019</h3>
-                        <p>Amirkabir Univeristy of Technology</p>
-                    </div>
-                    <div class="body">
-                        <p>Teaching Assistnat for "Machine Learning" Course</p>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-    </section>
-
-    <section id="honors" class="four">
-        <div class="container">
-
-            <div class="timeline2">
-                <header>
-                    <h2>Honors and Rewards</h2>
-                </header>
-                <!--<div class="data">
-                    <div class="subject" style="padding-left: 0px;">Data Scientist</div>
-                    <div class="text row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-10">
-                            <a href="https://baladmaps.com/" target="_blank">
-                                <i>Balad Maps, Cafe Bazaar
-                                </i></a><br>
-                            As a data scientist, I am mostly involved in computer vision projects. I worked on object
-                            detection, segmentation, and image tagging projects. Also, I worked on data analysis
-                            problems, like analyzing user satisfaction.
-                        </div>
-                    </div>
-                </div>-->
-                <div>
-
-                    <div class="body">
-                        <div class="boxing container" style="max-width: 45em">
-                            <p class="center-text">Ranked Top 0.5% among all applicants of The Nationwide M.Sc. Admission Exam.</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div>
-                    <div class="body">
-                        <div class="boxing container" style="max-width: 45em">
-                            <p class="center-text">Best Final Project Award in Shariaty Technical and Vocational University.</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                    <div class="body">
-                        <div class="boxing container" style="max-width: 45em">
-                            <p class="center-text">Ranked Top 1% among all applicants of The Nationwide B.Sc. Admission Exam.</p>
-                        </div>
-                    </div>
-                </div>
-            
-
-            </div>
-
-
-        </div>
-    </section>
-
-
-    <!-- Contact -->
-    <!-- <section id="contact" class="four">
-        <div class="container">
-
-            <header>
-                <h2>Contact</h2>
-            </header>
-
-            <p></p>
-
-            <form method="post" action="#">
-                <div class="row">
-                    <div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name"/></div>
-                    <div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email"/></div>
-                    <div class="col-12">
-                        <textarea name="message" placeholder="Message"></textarea>
-                    </div>
-                    <div class="col-12">
-                        <input type="submit" value="Send Message"/>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </section> -->
-
-</div>
-
-<!-- Footer -->
-<div id="footer">
-
-    <!-- Copyright -->
-    <ul class="copyright">
-        <!-- <li>&copy; Untitled. All rights reserved.</li> -->
-        <!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-name">N. Izadyar</a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
+  </div>
+</nav>
 
-</div>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-label">Ph.D. Candidate · University of Victoria</div>
+      <h1>Nafiseh <strong>Izadyar</strong></h1>
+      <p class="hero-bio">
+        Researcher in <em>Machine Learning</em> and <em>Computer Graphics</em>, working at the intersection of Large Language Models, multimodal learning, and 3D geometric modeling. Currently exploring LLM-guided inference for CAD shapes and boundary representation.
+      </p>
+      <div class="hero-links">
+        <a href="#publications" class="btn btn-primary">Publications</a>
+        <a href="mailto:nizadyar@uvic.ca" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-graphic">
+      <div class="geo-container">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer ring -->
+          <g class="geo-ring">
+            <circle cx="200" cy="200" r="170" fill="none" stroke="#d4d0c8" stroke-width="0.5"/>
+            <polygon points="200,30 370,200 200,370 30,200" fill="none" stroke="#8b4513" stroke-width="0.8" opacity="0.4"/>
+          </g>
+          <!-- Middle ring -->
+          <g class="geo-ring-reverse">
+            <circle cx="200" cy="200" r="120" fill="none" stroke="#d4d0c8" stroke-width="0.5"/>
+            <polygon points="200,80 320,200 200,320 80,200" fill="none" stroke="#8b4513" stroke-width="1" opacity="0.5"/>
+            <polygon points="140,110 290,140 260,290 110,260" fill="none" stroke="#c4956a" stroke-width="0.6" opacity="0.3"/>
+          </g>
+          <!-- Inner elements -->
+          <g class="geo-pulse">
+            <circle cx="200" cy="200" r="60" fill="none" stroke="#8b4513" stroke-width="1.2" opacity="0.6"/>
+          </g>
+          <!-- Vertices -->
+          <circle cx="200" cy="30" r="3" fill="#8b4513" opacity="0.6" class="geo-ring"/>
+          <circle cx="370" cy="200" r="3" fill="#8b4513" opacity="0.6" class="geo-ring"/>
+          <circle cx="200" cy="370" r="3" fill="#8b4513" opacity="0.6" class="geo-ring"/>
+          <circle cx="30" cy="200" r="3" fill="#8b4513" opacity="0.6" class="geo-ring"/>
+          <!-- Center dot -->
+          <circle cx="200" cy="200" r="4" fill="#8b4513"/>
+          <!-- Wireframe cube hint -->
+          <g opacity="0.25" stroke="#8b4513" stroke-width="0.6" fill="none">
+            <path d="M170,170 L230,170 L245,155 L185,155 Z"/>
+            <path d="M170,170 L170,230 L230,230 L230,170"/>
+            <path d="M230,170 L245,155 L245,215 L230,230"/>
+            <path d="M170,230 L185,215 L245,215" stroke-dasharray="3,3"/>
+            <path d="M185,155 L185,215" stroke-dasharray="3,3"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<!-- Research -->
+<section id="research">
+  <div class="section-inner reveal">
+    <div class="section-label">Research Areas</div>
+    <h2 class="section-title">What I Work On</h2>
+    <div class="divider"></div>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>LLM-Guided 3D Inference</h3>
+        <p>Using Large Language Models to guide material inference and reasoning over 3D point clouds and CAD models, bridging language understanding with geometric data.</p>
+        <span class="research-tag">LLMs</span>
+        <span class="research-tag">3D Point Clouds</span>
+        <span class="research-tag">Multimodal</span>
+      </div>
+      <div class="research-card">
+        <h3>Boundary Representation</h3>
+        <p>Developing better formats and datasets for B-Rep modeling, including topology-aware meshing and half-edge data structures for CAD applications.</p>
+        <span class="research-tag">B-Rep</span>
+        <span class="research-tag">STEP Files</span>
+        <span class="research-tag">CAD</span>
+      </div>
+      <div class="research-card">
+        <h3>Geometric Representation Learning</h3>
+        <p>Learning robust representations of 3D geometric data through multimodal models, combining visual features with structural and material properties.</p>
+        <span class="research-tag">Deep Learning</span>
+        <span class="research-tag">Representation Learning</span>
+        <span class="research-tag">3D Data</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Publications -->
+<section id="publications" style="background: var(--cream);">
+  <div class="section-inner reveal">
+    <div class="section-label">Publications</div>
+    <h2 class="section-title">Selected Works</h2>
+    <div class="divider"></div>
+    <ul class="pub-list">
+
+      <li class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2604.02141">Topology-First B-Rep Meshing</a></div>
+          <div class="pub-authors">Y.F. Zhou, D. Zint, <strong>N. Izadyar</strong>, M. Tao, D. Panozzo, T. Schneider</div>
+          <div class="pub-venue">arXiv preprint arXiv:2604.02141 <span class="pub-badge badge-preprint">Preprint</span></div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">Multi-Attribute Utility Deep Reinforcement Learning for Sequential Multi-Criteria Decision Problems</div>
+          <div class="pub-authors">M. Nematollahi, A. Guitouni, <strong>N. Izadyar</strong>, N. Belacel, A. Park</div>
+          <div class="pub-venue">Computers &amp; Operations Research, 107426 <span class="pub-badge badge-published">Published</span></div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2512.03237">LLM-Guided Material Inference for 3D Point Clouds</a></div>
+          <div class="pub-authors"><strong>N. Izadyar</strong>, T. Schneider</div>
+          <div class="pub-venue">arXiv preprint arXiv:2512.03237 <span class="pub-badge badge-preprint">Under Review</span></div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2506.05417">Better STEP, a Format and Dataset for Boundary Representation</a></div>
+          <div class="pub-authors"><strong>N. Izadyar</strong>, S.C. Madduri, T. Schneider</div>
+          <div class="pub-venue">arXiv preprint arXiv:2506.05417 <span class="pub-badge badge-preprint">Under Review</span></div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">Forest Road Planning to Improve Tourism Accessibility</div>
+          <div class="pub-authors">M. Talebi, A. Nickabadi, B. Majnounian, E. Abdi, R. Safabakhsh, <strong>N. Izadyar</strong>, et al.</div>
+          <div class="pub-venue">Geocarto International 37(25), 10076–10095 <span class="pub-badge badge-published">Published</span></div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="section-inner reveal">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="divider"></div>
+    <div class="edu-timeline">
+
+      <div class="edu-item">
+        <div class="edu-degree">Ph.D. in Computer Science</div>
+        <div class="edu-school">University of Victoria, Canada</div>
+        <div class="edu-date">Sept 2021 – Feb 2027 (expected)</div>
+        <div class="edu-details">
+          Thesis: Advancing Geometric Representation and Material Inference for 3D CAD Models. Supervised by Dr. Teseo Schneider. Focus on LLMs, multimodal learning, and B-Rep modeling.
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-degree">M.Sc. in Artificial Intelligence</div>
+        <div class="edu-school">Amirkabir University of Technology, Tehran</div>
+        <div class="edu-date">Sept 2016 – Feb 2019</div>
+        <div class="edu-details">
+          Thesis: Visual Question Answering using Deep Learning, Computer Vision, NLP, and Reinforcement Learning. Advised by Dr. Ahmad Nickabadi.
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-degree">B.Sc. in Computer Software Engineering</div>
+        <div class="edu-school">Shariaty Technical and Vocational University, Tehran</div>
+        <div class="edu-date">Sept 2011 – Sept 2015</div>
+        <div class="edu-details">
+          Thesis: Fingerprint Recognition. Awarded Best Project of the Year.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Teaching & Experience -->
+<section id="teaching" style="background: var(--cream);">
+  <div class="section-inner reveal">
+    <div class="section-label">Teaching & Experience</div>
+    <h2 class="section-title">In the Classroom & Beyond</h2>
+    <div class="divider"></div>
+
+    <div class="teaching-card">
+      <h3>Sessional Instructor — CSC 115</h3>
+      <div class="teaching-meta"><span>University of Victoria</span> · May – August 2026</div>
+      <p style="font-size:0.92rem; color:var(--muted);">Instructor for CSC 115: Fundamentals of Programming II.</p>
+    </div>
+
+    <div class="teaching-card">
+      <h3>Teaching Assistant</h3>
+      <div class="teaching-meta"><span>University of Victoria</span> · Sept 2021 – Present</div>
+      <p style="font-size:0.92rem; color:var(--muted);">Led tutorials and labs for undergraduate and graduate CS courses. Mentored students on ML, algorithms, and software engineering.</p>
+    </div>
+
+    <div class="teaching-card">
+      <h3>Research Assistant</h3>
+      <div class="teaching-meta"><span>Department of Computer Science, UVic</span> · Sept 2021 – Present</div>
+      <p style="font-size:0.92rem; color:var(--muted);">Designed ML pipelines for large-scale CAD datasets, implemented evaluation metrics for CAD model validity, and worked with multimodal models combining geometric data with learned representations.</p>
+    </div>
+
+    <div class="teaching-card">
+      <h3>Innovation & Systems Co-op</h3>
+      <div class="teaching-meta"><span>Legislative Assembly of British Columbia</span> · May – Aug 2023</div>
+      <p style="font-size:0.92rem; color:var(--muted);">Applied AI governance and deployment in a production government environment. Integrated AI tools with attention to reliability, performance, and stakeholder needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-inner reveal">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Tools & Expertise</h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3><span class="icon">◆</span> ML & LLMs</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">LLMs</span>
+          <span class="skill-tag">Multimodal Models</span>
+          <span class="skill-tag">Reinforcement Learning</span>
+          <span class="skill-tag">Representation Learning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3><span class="icon">◆</span> CAD & Geometry</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">B-Rep</span>
+          <span class="skill-tag">STEP Files</span>
+          <span class="skill-tag">OpenCascade</span>
+          <span class="skill-tag">Geometric Modeling</span>
+          <span class="skill-tag">Half-Edge Structures</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3><span class="icon">◆</span> Systems & Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">CUDA</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3><span class="icon">◆</span> Graphics & Vision</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">3D Data Processing</span>
+          <span class="skill-tag">OpenCV</span>
+          <span class="skill-tag">Point Clouds</span>
+          <span class="skill-tag">OpenAI Gym</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner reveal">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="contact-text">
+          I'm always open to discussing research collaborations, speaking opportunities, or questions about my work in ML and computer graphics.
+        </p>
+      </div>
+      <div>
+        <ul class="contact-links">
+          <li>
+            <a href="mailto:nizadyar@uvic.ca">
+              <div>
+                <span class="link-label">Email</span>
+                nizadyar@uvic.ca
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Nafiseh-Izadyar" target="_blank" rel="noopener">
+              <div>
+                <span class="link-label">GitHub</span>
+                github.com/Nafiseh-Izadyar
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/nafiseh-izadyar-53b391147" target="_blank" rel="noopener">
+              <div>
+                <span class="link-label">LinkedIn</span>
+                linkedin.com/in/nafiseh-izadyar
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">
+              <div>
+                <span class="link-label">Google Scholar</span>
+                Nafiseh Izadyar
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Nafiseh Izadyar · University of Victoria
+</footer>
+
+<script>
+// Navbar scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>

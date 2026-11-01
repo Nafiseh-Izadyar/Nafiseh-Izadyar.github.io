@@ -1,4 +1,4 @@
-# Nafiseh Izadyar — portfolio website
+# Nafiseh Izadyar portfolio website
 
 A GitHub Pages–ready, responsive 5-page website. No build step, npm, or framework required.
 
